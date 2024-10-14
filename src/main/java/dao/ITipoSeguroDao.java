@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import dominio.TipoSeguro;
 
-public interface TipoSeguroDao {
+public interface ITipoSeguroDao {
 
 	public TipoSeguro getTipoSeguroPorId(int id);
 	

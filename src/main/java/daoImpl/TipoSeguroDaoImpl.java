@@ -4,10 +4,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import dao.TipoSeguroDao;
+import dao.ITipoSeguroDao;
 import dominio.TipoSeguro;
 
-public class TipoSeguroDaoImpl implements TipoSeguroDao {
+public class TipoSeguroDaoImpl implements ITipoSeguroDao {
 
 	private Conexion conn =  null;
 	

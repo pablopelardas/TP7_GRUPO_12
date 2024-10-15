@@ -23,7 +23,7 @@
 <nav class="menu-nav">
 	<a href="Inicio.jsp">Inicio</a> |
 	<a href="AgregarSeguro.jsp">Agregar Seguro</a> |
-	<a href="#">Listar Seguro</a>
+	<a href="ListarSeguros.jsp">Listar Seguro</a>
 </nav>
 
 <h2> Soy la página inicio</h2>

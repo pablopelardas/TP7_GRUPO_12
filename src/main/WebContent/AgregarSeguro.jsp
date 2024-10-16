@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>TP N° 7 Grupo 12</title>
+<title>TP N° 7 Grupo 12 - Agregar Seguro</title>
 
 <style>
 
@@ -128,7 +128,7 @@
 <nav class="menu-nav">
 	<a href="Inicio.jsp">Inicio</a> |
 	<a href="AgregarSeguro.jsp">Agregar Seguro</a> |
-	<a href="ListarSeguros.jsp">Listar Seguro</a>
+	<a href="ServletListarSeguros?tipo-seguro=todos&txtFiltrar=Filtrar">Listar Seguro</a>
 </nav>
 
 <div class="formbold-main-wrapper">

@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="dominio.Seguro" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>TP N° 7 Grupo 12 - Listar Seguro</title>
 <style>
 	.menu-nav{
 	  	width: 100%;
@@ -79,9 +82,9 @@
 <nav class="menu-nav">
 	<a href="Inicio.jsp">Inicio</a> |
 	<a href="AgregarSeguro.jsp">Agregar Seguro</a> |
-	<a href="ListarSeguros.jsp">Listar Seguro</a>
+	<a href="ServletListarSeguros?tipo-seguro=todos&txtFiltrar=Filtrar">Listar Seguro</a>
 </nav>
-<form>	
+<form action="ServletListarSeguros" method="get">	
 	<div>	
 		<h2>Tipos de seguros de la base de datos</h2>
 		<p>Búsqueda por tipo de Seguros:</p>  
@@ -90,7 +93,7 @@
 		        id="tipo-seguro"
 		        class="formbold-form-input"
 		      >
-		        <option value="auto">Auto</option>
+		        <option value="moto">Moto</option>
 		        <option value="hogar">Hogar</option>
 		        <option value="vida">Vida</option>
 		        <!-- Add other options as needed -->
@@ -106,6 +109,32 @@
                 <th>Costo máximo asegurado</th>
             </tr>
         </thead>
+        <tbody>
+        	<% 
+        	ArrayList<Seguro>listaSeguros;
+        	listaSeguros = (ArrayList<Seguro>)request.getAttribute("seguroLista"); 
+        	if (listaSeguros != null && !listaSeguros.isEmpty()) {
+                for (Seguro seguro : listaSeguros) {
+        	%>
+        	        <tr>
+                        <td><%= seguro.getIdSeguro() %></td>
+                        <td><%= seguro.getDescripcion() %></td>
+                        <td><%= seguro.getIdTipo() %></td>
+                        <td><%= seguro.getCostoContratacion() %></td>
+                        <td><%= seguro.getCostoMAsegurado() %></td>
+                    </tr>
+                            <%
+                        }
+                    } else {
+            %>
+                    <tr>
+                        <td colspan="5">No se encontraron seguros.</td>
+                    </tr>
+            <%
+                    }
+            %>
+        
+        </tbody>
         </table>
 	</div>
     

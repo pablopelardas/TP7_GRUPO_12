@@ -9,8 +9,7 @@ public class Seguro {
 	
 	public Seguro() {}
 	
-	public Seguro(int idSeguro, String descripcion, int idTipo, float costoContratacion, float costoMAsegurado) {
-		IdSeguro = idSeguro;
+	public Seguro(String descripcion, int idTipo, float costoContratacion, float costoMAsegurado) {
 		Descripcion = descripcion;
 		IdTipo = idTipo;
 		CostoContratacion = costoContratacion;

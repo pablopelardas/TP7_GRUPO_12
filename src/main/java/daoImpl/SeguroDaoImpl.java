@@ -13,6 +13,7 @@ public class SeguroDaoImpl implements ISeguroDao {
 	private static final String insert = "INSERT INTO seguros(idSeguro, descripcion, idTipo, costoContratacion, costoAsegurado) VALUES(?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM seguros WHERE idSeguro = ?";
 	private static final String readall = "SELECT * FROM seguros";
+	private static final String siguiente = "SELECT MAX(idSeguro) FROM seguros";
 		
 	public boolean insert(Seguro seguro)
 	{
@@ -97,6 +98,22 @@ public class SeguroDaoImpl implements ISeguroDao {
 		int idTipo = resultSet.getInt("idTipo");
 		float costoContratacion = resultSet.getFloat("costoContratacion");
 		float costoAsegurado = resultSet.getFloat("costoAsegurado");
-		return new Seguro(id, descripcion, idTipo, costoContratacion, costoAsegurado);
+		return new Seguro(descripcion, idTipo, costoContratacion, costoAsegurado);
 	}
+	
+    public int calcularSiguienteId() {
+        int ultimoId = 0;
+        Connection conexion = Conexion.getConexion().getSQLConexion();
+        try {
+        	PreparedStatement statement = conexion.prepareStatement(siguiente);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                ultimoId = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ultimoId + 1;
+    }
 }

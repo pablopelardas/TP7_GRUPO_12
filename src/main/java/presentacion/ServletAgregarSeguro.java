@@ -1,6 +1,8 @@
 package presentacion;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 // import jakarta.servlet.ServletException;
 // import jakarta.servlet.annotation.WebServlet;
 // import jakarta.servlet.http.HttpServlet;
@@ -11,6 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dominio.Seguro;
+import negocioImpl.SeguroNegocioImpl;
 
 /**
  * Servlet implementation class servletAgregarUsuario
@@ -34,12 +39,15 @@ public class ServletAgregarSeguro extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
+        
         // Recuperar los datos del formulario con validaciones para valores vacíos
         String descripcion = request.getParameter("descripcion");
         descripcion = (descripcion == null || descripcion.trim().isEmpty()) ? "Sin descripción" : descripcion;
 
-        String tipoSeguro = request.getParameter("tipo-seguro");
-        tipoSeguro = (tipoSeguro == null || tipoSeguro.trim().isEmpty()) ? "sin tipo" : tipoSeguro;
+        String tipoSeguroParam = request.getParameter("tipo-seguro");
+        int tipoSeguro = (int) (tipoSeguroParam == null || tipoSeguroParam.trim().isEmpty() 
+        ? 0.0f : Integer.parseInt(tipoSeguroParam));
+
 
         String costoContratacionParam = request.getParameter("costo-contratacion");
         float costoContratacion = (costoContratacionParam == null || costoContratacionParam.trim().isEmpty()) 
@@ -49,16 +57,25 @@ public class ServletAgregarSeguro extends HttpServlet {
         float costoMaximo = (costoMaximoParam == null || costoMaximoParam.trim().isEmpty()) 
             ? 0.0f : Float.parseFloat(costoMaximoParam);
 
-        // Crear un objeto JSON manualmente
-        String jsonResponse = "{"
-                + "\"descripcion\": \"" + descripcion + "\","
-                + "\"tipoSeguro\": \"" + tipoSeguro + "\","
-                + "\"costoContratacion\": " + costoContratacion + ","
-                + "\"costoMaximo\": " + costoMaximo
-                + "}";
-
-        // Devolver la respuesta en formato JSON
-        response.getWriter().append(jsonResponse);
+        Seguro seguro = new Seguro(descripcion, tipoSeguro, costoContratacion, costoMaximo);
+        
+        SeguroNegocioImpl seguroNegocioImpl = new SeguroNegocioImpl();
+        seguroNegocioImpl.insert(seguro);
+        
+        int nuevoId = seguroNegocioImpl.calcularSiguienteId();
+        request.setAttribute("nuevoId", nuevoId);
+		RequestDispatcher rd = request.getRequestDispatcher("/AgregarSeguro.jsp");   
+        rd.forward(request, response);  
+        
+    }
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        SeguroNegocioImpl seguroNegocioImpl = new SeguroNegocioImpl();
+        
+        int nuevoId = seguroNegocioImpl.calcularSiguienteId();
+        
+        request.setAttribute("nuevoId", nuevoId);
+        request.getRequestDispatcher("/AgregarSeguro.jsp").forward(request, response);
     }
 
 }

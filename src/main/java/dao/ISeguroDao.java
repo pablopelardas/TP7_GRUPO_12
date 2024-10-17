@@ -8,4 +8,5 @@ public interface ISeguroDao {
 	public boolean insert(Seguro seguro);
 	public boolean delete(Seguro seguro);
 	public ArrayList<Seguro> readAll();
+	public int calcularSiguienteId();
 }

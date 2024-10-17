@@ -37,4 +37,7 @@ public class SeguroNegocioImpl implements ISeguroNegocio{
 	public ArrayList<Seguro> readAll() {
 		return sdao.readAll();
 	}
+	public int calcularSiguienteId() {
+		return sdao.calcularSiguienteId();
+	}
 }

@@ -125,6 +125,10 @@
 </style>
 </head>
 <body>
+<%
+    Integer nuevoId = (Integer) request.getAttribute("nuevoId");
+
+%>
 <nav class="menu-nav">
 	<a href="Inicio.jsp">Inicio</a> |
 	<a href="AgregarSeguro.jsp">Agregar Seguro</a> |
@@ -139,7 +143,7 @@
     	<!-- Display of Id Seguro -->
 	    <div class="formbold-mb-5">
 	      <label for="id-seguro" class="formbold-form-label"> Id Seguro </label>
-	      <div id="id-seguro" class="formbold-form-id-display"> 12345 </div>
+	      <div id="id-seguro" class="formbold-form-id-display"> <%=nuevoId %> </div>
 	    </div>
 	    <div class="formbold-mb-5">
 	      <label for="descripcion" class="formbold-form-label"> Descripción </label>
@@ -159,9 +163,9 @@
 	        id="tipo-seguro"
 	        class="formbold-form-input"
 	      >
-	        <option value="auto">Auto</option>
-	        <option value="hogar">Hogar</option>
-	        <option value="vida">Vida</option>
+	        <option value=1>Auto</option>
+	        <option value=2>Hogar</option>
+	        <option value=3>Vida</option>
 	        <!-- Add other options as needed -->
 	      </select>
 	    </div>
@@ -192,7 +196,7 @@
 		    </div>		
 		</div>
 	    <div>
-	      <button class="formbold-btn">Guardar Seguro</button>
+	      <button type="submit" class="formbold-btn">Guardar Seguro</button>
 	    </div>
 	  </form>
 	</div>

@@ -68,13 +68,22 @@ public class ServletAgregarSeguro extends HttpServlet {
         if(!descripcion.isEmpty() && tipoSeguro > 0.0f && costoContratacion > 0.0f && costoMaximo > 0.0f) {
         	Seguro seguro = new Seguro(nuevoId, descripcion, tipoSeguro, costoContratacion, costoMaximo);        	
         	seguroNegocioImpl.insert(seguro);
+        	request.setAttribute("successMessage", "Seguro guardado correctamente.");
         }else {
-        	System.out.println("No se pudo agregar el seguro");
+        	request.setAttribute("errorMessage", "Se deben completar todos los campos.");
+
+            List<TipoSeguro> tiposSeguros = tipoSeguroNegocioImpl.readAll();
+            
+            request.setAttribute("tiposSeguros", tiposSeguros);
+            request.setAttribute("nuevoId", seguroNegocioImpl.calcularSiguienteId());
+
+            // Reenviar a la página JSP
+            RequestDispatcher rd = request.getRequestDispatcher("/AgregarSeguro.jsp");
+            rd.forward(request, response);
         }
        
         List<TipoSeguro> tiposSeguros = tipoSeguroNegocioImpl.readAll();
 
-        // Verificar si la lista es nula o vacía
         if (tiposSeguros == null) {
             tiposSeguros = new ArrayList<>();
         }

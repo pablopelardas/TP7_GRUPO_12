@@ -125,6 +125,30 @@
       width: 50%;
     }
   }
+  
+  	.alert-container{
+  		max-width: 600px;
+    	margin: 20px auto;
+    	text-align: center;
+    	font-size: 20px;
+  }
+  .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+    
+    .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        padding: 13px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
 </style>
 </head>
 <body>
@@ -212,7 +236,24 @@
 	  </form>
 	</div>
 </div>
-
-
+<div class="alert-container">
+	<% 
+	    String errorMessage = (String) request.getAttribute("errorMessage"); 
+		String successMessage = (String) request.getAttribute("successMessage");
+   		  if (errorMessage != null) { 
+   			  %>
+   			      <div class="alert alert-danger" role="alert">
+   			          <%= errorMessage %>
+   			      </div>
+   			  <% 
+   			      } else if (successMessage != null) { 
+   			  %>
+   			      <div class="alert alert-success" role="alert">
+   			          <%= successMessage %>
+   			      </div>
+   			  <% 
+   			      } 
+   			  %>
+</div>
 </body>
 </html>

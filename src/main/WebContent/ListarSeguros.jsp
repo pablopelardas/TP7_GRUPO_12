@@ -93,10 +93,9 @@
 		        id="tipo-seguro"
 		        class="formbold-form-input"
 		      >
-		        <option value="moto">Moto</option>
-		        <option value="hogar">Hogar</option>
-		        <option value="vida">Vida</option>
-		        <!-- Add other options as needed -->
+		        <option value="moto" <%= "moto".equals(request.getParameter("tipo-seguro")) ? "selected" : "" %>>Moto</option>
+		        <option value="hogar" <%= "hogar".equals(request.getParameter("tipo-seguro")) ? "selected" : "" %>>Hogar</option>
+		        <option value="vida" <%= "vida".equals(request.getParameter("tipo-seguro")) ? "selected" : "" %>>Vida</option>
 		      </select>
 		 <input type="submit" name="txtFiltrar" value="Filtrar">
 		 <table>

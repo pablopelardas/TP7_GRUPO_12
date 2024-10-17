@@ -47,7 +47,24 @@ public class ServletListarSeguros extends HttpServlet {
 		            iterator.remove();
 		        }
 		    }
-		}
+		}else if (request.getParameter("tipo-seguro").equals("moto")) {
+	        Iterator<Seguro> iterator = seguroLista.iterator();
+	        while (iterator.hasNext()) {
+	            Seguro seguro = iterator.next();
+	            if (seguro.getIdTipo() != 2) {
+	                iterator.remove();
+	            }
+	        }
+	    } else if (request.getParameter("tipo-seguro").equals("vida")) {
+	        Iterator<Seguro> iterator = seguroLista.iterator();
+	        while (iterator.hasNext()) {
+	            Seguro seguro = iterator.next();
+	            if (seguro.getIdTipo() != 3) {
+	                iterator.remove();
+	            }
+	        }
+	    }
+		
 		request.setAttribute("seguroLista", seguroLista);
 		RequestDispatcher rd = request.getRequestDispatcher("/ListarSeguros.jsp");
 		rd.forward(request,response);

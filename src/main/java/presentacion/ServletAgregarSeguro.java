@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -43,7 +44,7 @@ public class ServletAgregarSeguro extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         SeguroNegocioImpl seguroNegocioImpl = new SeguroNegocioImpl();
-        
+        TipoSeguroNegocioImpl tipoSeguroNegocioImpl = new TipoSeguroNegocioImpl();
 
         
         // Recuperar los datos del formulario con validaciones para valores vacíos
@@ -64,12 +65,23 @@ public class ServletAgregarSeguro extends HttpServlet {
         float costoMaximo = (costoMaximoParam == null || costoMaximoParam.trim().isEmpty()) 
             ? 0.0f : Float.parseFloat(costoMaximoParam);
 
-        Seguro seguro = new Seguro(nuevoId, descripcion, tipoSeguro, costoContratacion, costoMaximo);
-        
-        seguroNegocioImpl.insert(seguro);
+        if(!descripcion.isEmpty() && tipoSeguro > 0.0f && costoContratacion > 0.0f && costoMaximo > 0.0f) {
+        	Seguro seguro = new Seguro(nuevoId, descripcion, tipoSeguro, costoContratacion, costoMaximo);        	
+        	seguroNegocioImpl.insert(seguro);
+        }else {
+        	System.out.println("No se pudo agregar el seguro");
+        }
+       
+        List<TipoSeguro> tiposSeguros = tipoSeguroNegocioImpl.readAll();
+
+        // Verificar si la lista es nula o vacía
+        if (tiposSeguros == null) {
+            tiposSeguros = new ArrayList<>();
+        }
         
         nuevoId = seguroNegocioImpl.calcularSiguienteId();
         request.setAttribute("nuevoId", nuevoId);
+        request.setAttribute("tiposSeguros", tiposSeguros);
 		RequestDispatcher rd = request.getRequestDispatcher("/AgregarSeguro.jsp");   
         rd.forward(request, response);  
         

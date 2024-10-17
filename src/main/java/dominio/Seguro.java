@@ -9,7 +9,8 @@ public class Seguro {
 	
 	public Seguro() {}
 	
-	public Seguro(String descripcion, int idTipo, float costoContratacion, float costoMAsegurado) {
+	public Seguro(int IdSeguro, String descripcion, int idTipo, float costoContratacion, float costoMAsegurado) {
+		this.IdSeguro = IdSeguro;
 		Descripcion = descripcion;
 		IdTipo = idTipo;
 		CostoContratacion = costoContratacion;

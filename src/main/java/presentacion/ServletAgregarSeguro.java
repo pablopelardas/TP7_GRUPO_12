@@ -38,9 +38,12 @@ public class ServletAgregarSeguro extends HttpServlet {
         // Configurar el tipo de contenido de la respuesta a JSON
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+        SeguroNegocioImpl seguroNegocioImpl = new SeguroNegocioImpl();
+        
 
         
         // Recuperar los datos del formulario con validaciones para valores vacíos
+        int nuevoId = seguroNegocioImpl.calcularSiguienteId();
         String descripcion = request.getParameter("descripcion");
         descripcion = (descripcion == null || descripcion.trim().isEmpty()) ? "Sin descripción" : descripcion;
 
@@ -57,12 +60,11 @@ public class ServletAgregarSeguro extends HttpServlet {
         float costoMaximo = (costoMaximoParam == null || costoMaximoParam.trim().isEmpty()) 
             ? 0.0f : Float.parseFloat(costoMaximoParam);
 
-        Seguro seguro = new Seguro(descripcion, tipoSeguro, costoContratacion, costoMaximo);
+        Seguro seguro = new Seguro(nuevoId, descripcion, tipoSeguro, costoContratacion, costoMaximo);
         
-        SeguroNegocioImpl seguroNegocioImpl = new SeguroNegocioImpl();
         seguroNegocioImpl.insert(seguro);
         
-        int nuevoId = seguroNegocioImpl.calcularSiguienteId();
+        nuevoId = seguroNegocioImpl.calcularSiguienteId();
         request.setAttribute("nuevoId", nuevoId);
 		RequestDispatcher rd = request.getRequestDispatcher("/AgregarSeguro.jsp");   
         rd.forward(request, response);  

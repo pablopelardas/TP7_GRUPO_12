@@ -98,7 +98,7 @@ public class SeguroDaoImpl implements ISeguroDao {
 		int idTipo = resultSet.getInt("idTipo");
 		float costoContratacion = resultSet.getFloat("costoContratacion");
 		float costoAsegurado = resultSet.getFloat("costoAsegurado");
-		return new Seguro(descripcion, idTipo, costoContratacion, costoAsegurado);
+	    return new Seguro(id, descripcion, idTipo, costoContratacion, costoAsegurado);
 	}
 	
     public int calcularSiguienteId() {

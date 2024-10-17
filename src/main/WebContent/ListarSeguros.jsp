@@ -81,7 +81,7 @@
 <body>
 <nav class="menu-nav">
 	<a href="Inicio.jsp">Inicio</a> |
-	<a href="AgregarSeguro.jsp">Agregar Seguro</a> |
+	<a href="ServletAgregarSeguro">Agregar Seguro</a> |
 	<a href="ServletListarSeguros?tipo-seguro=todos&txtFiltrar=Filtrar">Listar Seguro</a>
 </nav>
 <form action="ServletListarSeguros" method="get">	

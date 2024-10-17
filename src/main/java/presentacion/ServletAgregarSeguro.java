@@ -1,6 +1,8 @@
 package presentacion;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 // import jakarta.servlet.ServletException;
@@ -15,7 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dominio.Seguro;
+import dominio.TipoSeguro;
 import negocioImpl.SeguroNegocioImpl;
+import negocioImpl.TipoSeguroNegocioImpl;
 
 /**
  * Servlet implementation class servletAgregarUsuario
@@ -73,10 +77,18 @@ public class ServletAgregarSeguro extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SeguroNegocioImpl seguroNegocioImpl = new SeguroNegocioImpl();
+        TipoSeguroNegocioImpl tipoSeguroNegocioImpl = new TipoSeguroNegocioImpl();
         
         int nuevoId = seguroNegocioImpl.calcularSiguienteId();
+        List<TipoSeguro> tiposSeguros = tipoSeguroNegocioImpl.readAll();
+        
+        // Verificar si la lista es nula o vacía
+        if (tiposSeguros == null) {
+            tiposSeguros = new ArrayList<>();
+        }
         
         request.setAttribute("nuevoId", nuevoId);
+        request.setAttribute("tiposSeguros", tiposSeguros);
         request.getRequestDispatcher("/AgregarSeguro.jsp").forward(request, response);
     }
 

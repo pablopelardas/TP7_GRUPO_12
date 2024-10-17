@@ -1,3 +1,6 @@
+<%@page import="dominio.TipoSeguro"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -127,6 +130,7 @@
 <body>
 <%
     Integer nuevoId = (Integer) request.getAttribute("nuevoId");
+	List<TipoSeguro> tiposSeguros = (List<TipoSeguro>) request.getAttribute("tiposSeguros");
 
 %>
 <nav class="menu-nav">
@@ -163,9 +167,16 @@
 	        id="tipo-seguro"
 	        class="formbold-form-input"
 	      >
-	        <option value=1>Auto</option>
-	        <option value=2>Hogar</option>
-	        <option value=3>Vida</option>
+                    <%
+	                    if (tiposSeguros == null) {
+	                        tiposSeguros = new ArrayList<>();
+	                    }
+                        for (TipoSeguro tipo : tiposSeguros) {
+                    %>
+                        <option value="<%=tipo.getId()%>"><%=tipo.getDescripcion()%></option>
+                    <%
+                        }
+                    %>
 	        <!-- Add other options as needed -->
 	      </select>
 	    </div>

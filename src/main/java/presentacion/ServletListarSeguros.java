@@ -11,8 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dominio.Seguro;
-import negocioImpl.SeguroNegocioImpl;
+//import dominio.Seguro;
+//import jakarta.servlet.RequestDispatcher;
+//import jakarta.servlet.ServletException;
+//import jakarta.servlet.annotation.WebServlet;
+//import jakarta.servlet.http.HttpServlet;
+//import jakarta.servlet.http.HttpServletRequest;
+//import jakarta.servlet.http.HttpServletResponse;
+//import negocioImpl.SeguroNegocioImpl;
 
 /**
  * Servlet implementation class ServletListarSeguros
@@ -43,7 +49,7 @@ public class ServletListarSeguros extends HttpServlet {
 		    Iterator<Seguro> iterator = seguroLista.iterator();
 		    while (iterator.hasNext()) {
 		        Seguro seguro = iterator.next();
-		        if (seguro.getIdTipo() != 1) {
+		        if (seguro.getTipoSeguro().getId() != 1) {
 		            iterator.remove();
 		        }
 		    }
@@ -51,7 +57,7 @@ public class ServletListarSeguros extends HttpServlet {
 	        Iterator<Seguro> iterator = seguroLista.iterator();
 	        while (iterator.hasNext()) {
 	            Seguro seguro = iterator.next();
-	            if (seguro.getIdTipo() != 2) {
+	            if (seguro.getTipoSeguro().getId() != 2) {
 	                iterator.remove();
 	            }
 	        }
@@ -59,7 +65,7 @@ public class ServletListarSeguros extends HttpServlet {
 	        Iterator<Seguro> iterator = seguroLista.iterator();
 	        while (iterator.hasNext()) {
 	            Seguro seguro = iterator.next();
-	            if (seguro.getIdTipo() != 3) {
+	            if (seguro.getTipoSeguro().getId() != 3) {
 	                iterator.remove();
 	            }
 	        }

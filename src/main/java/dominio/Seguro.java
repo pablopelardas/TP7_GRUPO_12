@@ -1,9 +1,13 @@
 package dominio;
 
+import dao.ITipoSeguroDao;
+import daoImpl.TipoSeguroDaoImpl;
+
 public class Seguro {
 	public int IdSeguro;
+	
 	public String Descripcion;
-	public int IdTipo;
+	private TipoSeguro tipoSeguro;
 	public float CostoContratacion;
 	public float CostoMAsegurado;
 	
@@ -11,8 +15,8 @@ public class Seguro {
 	
 	public Seguro(int IdSeguro, String descripcion, int idTipo, float costoContratacion, float costoMAsegurado) {
 		this.IdSeguro = IdSeguro;
+		this.tipoSeguro = getTipoSeguro(idTipo);
 		Descripcion = descripcion;
-		IdTipo = idTipo;
 		CostoContratacion = costoContratacion;
 		CostoMAsegurado = costoMAsegurado;
 	}
@@ -30,12 +34,15 @@ public class Seguro {
 	public void setDescripcion(String descripcion) {
 		Descripcion = descripcion;
 	}
-	public int getIdTipo() {
-		return IdTipo;
+
+	public TipoSeguro getTipoSeguro() {
+		return tipoSeguro;
 	}
-	public void setIdTipo(int idTipo) {
-		IdTipo = idTipo;
+
+	public void setTipoSeguro(TipoSeguro tipoSeguro) {
+		this.tipoSeguro = tipoSeguro;
 	}
+
 	public float getCostoContratacion() {
 		return CostoContratacion;
 	}
@@ -47,5 +54,11 @@ public class Seguro {
 	}
 	public void setCostoMAsegurado(float costoMAsegurado) {
 		CostoMAsegurado = costoMAsegurado;
+	}
+	
+	private TipoSeguro getTipoSeguro(int id) {
+		ITipoSeguroDao tsDao = new TipoSeguroDaoImpl();
+		TipoSeguro ts = tsDao.getTipoSeguroPorId(id);
+		return ts;
 	}
 }

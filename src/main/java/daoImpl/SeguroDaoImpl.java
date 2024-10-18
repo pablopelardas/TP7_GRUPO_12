@@ -25,7 +25,7 @@ public class SeguroDaoImpl implements ISeguroDao {
 			statement = conexion.prepareStatement(insert);
 			statement.setInt(1, seguro.getIdSeguro());
 			statement.setString(2, seguro.getDescripcion());
-			statement.setInt(3, seguro.getIdTipo());
+			statement.setInt(3, seguro.getTipoSeguro().getId());
 			statement.setFloat(4, seguro.getCostoContratacion());
 			statement.setFloat(5, seguro.getCostoMAsegurado());
 			if(statement.executeUpdate() > 0)

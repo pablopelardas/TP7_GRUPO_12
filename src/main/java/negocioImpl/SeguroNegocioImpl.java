@@ -16,7 +16,7 @@ public class SeguroNegocioImpl implements ISeguroNegocio{
 	public boolean insert(Seguro seguro) {
 		
 		boolean estado=false;
-		if(seguro.getDescripcion().trim().length()>0 && seguro.getDescripcion().trim().length()>0 && seguro.getIdTipo() != 0 && seguro.getCostoContratacion() != 0 && seguro.getCostoMAsegurado() != 0)
+		if(seguro.getDescripcion().trim().length()>0 && seguro.getDescripcion().trim().length()>0 && seguro.getTipoSeguro().getId() != 0 && seguro.getCostoContratacion() != 0 && seguro.getCostoMAsegurado() != 0)
 		{
 			estado=sdao.insert(seguro);
 		}
